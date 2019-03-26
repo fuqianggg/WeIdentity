@@ -38,6 +38,7 @@ RestService架构包括以下模块：
 * 用户传入接口参数，直接调用restful接口，weidentity-http-service调用sdk然后发送交易；
 
 改造后：
+
 * 用户应用调用weidentity-java-client，生成相应的业务参数签名及参数，然后POST http://localhost:20191/weIdentity/encodedTransaction，发送请求给weidentity-http-service
 * weidentity-http-service接受请求，返回EncodedTransaction给weidentity-java-client
 * 用户应用调用weidentity-java-client，生成交易签名，然后POST http://localhost:20191/weIdentity/sendTransaction，发送请求给weidentity-http-service
