@@ -96,7 +96,7 @@ WeIdentity目前支持基于FISCO-BCOS运行，并提供JAVA SDK供调用。具�
             <th width="50%">当前状态</th>
          </tr>
          <tr>
-            <td style="text-align:center">JAVA SDK</td>
+            <td style="text-align:center"><a href="https://github.com/WeBankFinTech/weidentity-java-sdk">JAVA SDK</a></td>
             <td>
                <ul>
                  <li><a href="https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-installation.html">安装部署文档</a></li>
