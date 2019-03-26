@@ -15,11 +15,11 @@ WeIdentity RestService API 文档
         "functionArg": 随调用SDK方法而变的入参json字符串 {
         },
         "transactionArg": 交易参数json字符串 {
-            "nonce": 交易随机数，请调用weidentity-client相应函数生成 "<..the nonce>",
-            "data": 交易特征值 "<..the data>"
+            "nonce": 交易随机数，请调用weidentity-java-client相应函数生成,
+            "data": 交易特征值
         }
-        "functionName": 调用SDK方法名 "<..the function name>",
-        "v": 调用版本 "<..the API version>"
+        "functionName": 调用SDK方法名,
+        "v": API版本号
     }
 
 参数说明：
@@ -74,7 +74,7 @@ WeIdentity RestService API 文档
 
 .. list-table::
    :header-rows: 1
-   :widths: 30 60 20
+   :widths: 30 50 20
 
    * - Key
      - Value
@@ -86,7 +86,7 @@ WeIdentity RestService API 文档
      - 
      - Y
    * - functionArg.publicKey
-     - 符合ECDSA标准的公钥整型数，与[SDK直接调用的方式入参](https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#id9)一致。
+     - 符合ECDSA标准的公钥整型数，与 `SDK直接调用的方式入参 <https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#id9>`_ 一致。
      - Y
    * - transactionArg
      - 
@@ -235,7 +235,7 @@ result包含encodedTransaction和data两项。调用者将data妥善保管。
    * - ErrorMessage
      - 错误信息
    * - respBody
-     - True
+     - True/False
 
 返回示例：
 
@@ -282,7 +282,7 @@ result包含encodedTransaction和data两项。调用者将data妥善保管。
      - 
      - Y
    * - functionArg.weId
-     - WeIdentity DID，与[SDK直接调用的方式入参](https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#id9)一致。
+     - WeIdentity DID，与 `SDK直接调用的方式入参 <https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#getweiddocment>`_ 一致。
      - Y
    * - transactionArg
      - 
@@ -378,7 +378,7 @@ result包含encodedTransaction和data两项。调用者将data妥善保管。
      - 
      - Y
    * - functionArg.weId
-     - WeIdentity DID，与[SDK直接调用的方式入参](https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#id9)一致，下同
+     - WeIdentity DID，与 `SDK直接调用的方式入参 <https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#registercpt>`_ 一致，下同
      - Y
    * - functionArg.name
      - 机构名
@@ -531,7 +531,7 @@ POST /weIdentity/sendTransaction
    * - ErrorMessage
      - 错误信息
    * - respBody
-     - True
+     - True/False
 
 返回示例：
 
@@ -578,7 +578,7 @@ POST /weIdentity/sendTransaction
      - 
      - Y
    * - functionArg.weId
-     - WeIdentity DID，与[SDK直接调用的方式入参](https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#id9)一致。
+     - WeIdentity DID，与 `SDK直接调用的方式入参 <https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#queryauthorityissuer>`_ 一致。
      - Y
    * - transactionArg
      - 
@@ -668,7 +668,7 @@ POST /weIdentity/sendTransaction
      - 
      - Y
    * - functionArg.weId
-     - CPT创建者，与[SDK直接调用的方式入参](https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#id9)一致，后略
+     - CPT创建者，`SDK直接调用的方式入参 <https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#registercpt>`_ 一致，后略
      - Y
    * - functionArg.cptJsonSchema
      - CPT Json Schema
@@ -868,9 +868,47 @@ POST /weIdentity/sendTransaction
 7. 查询CPT
 -----------
 
-POST /weIdentity/InvokeFunction
+调用接口：
 
-接口入参：Json，cptId
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50
+
+   * - 标题
+     - 描述
+   * - 接口名
+     - weIdentity/InvokeFunction
+   * - Method
+     - POST
+   * - Content-Type
+     - application/json
+
+接口入参：
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 60 20
+
+   * - Key
+     - Value
+     - Required
+   * - functionName
+     - queryCpt
+     - Y
+   * - functionArg
+     - 
+     - Y
+   * - functionArg.cptId
+     - CPT ID，与 `SDK直接调用的方式入参 <https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#querycpt>`_ 一致。
+     - Y
+   * - transactionArg
+     - 
+     - N
+   * - v
+     - 版本号
+     - Y
+
+接口入参示例：
 
 .. code-block:: java
 
@@ -884,9 +922,22 @@ POST /weIdentity/InvokeFunction
         "v": "1.0.0"
     }
 
-入参说明与SDK文档一致：https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#querycpt
+接口返回: application/json
 
-接口返回：Json，完整的Cpt信息
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50
+
+   * - Key
+     - Value
+   * - ErrorCode
+     - 错误码，0表示成功
+   * - ErrorMessage
+     - 错误信息
+   * - respBody
+     - 完整的CPT信息
+
+接口返回示例：
 
 .. code-block:: java
 
@@ -922,7 +973,54 @@ POST /weIdentity/InvokeFunction
 8. 创建Credential
 ------------------
 
-POST /weIdentity/InvokeFunction
+调用接口：
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50
+
+   * - 标题
+     - 描述
+   * - 接口名
+     - weIdentity/InvokeFunction
+   * - Method
+     - POST
+   * - Content-Type
+     - application/json
+
+接口入参：
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 60 20
+
+   * - Key
+     - Value
+     - Required
+   * - functionName
+     - createCredential
+     - Y
+   * - functionArg
+     - 
+     - Y
+   * - functionArg.cptId
+     - CPT ID，与 `SDK直接调用的方式入参 <https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#createcredential>`_ 一致，下同。
+     - Y
+   * - functionArg.issuer
+     - issuer WeID
+     - Y
+   * - functionArg.expirationDate
+     - 过期时间（使用UTC格式）
+     - Y
+   * - functionArg.claim
+     - claim Json结构体
+     - Y
+   * - transactionArg
+     - 
+     - N
+   * - v
+     - 版本号
+     - Y
 
 接口入参：Json，以signature代替私钥
 
@@ -933,7 +1031,7 @@ POST /weIdentity/InvokeFunction
             "cptId": 10,
             "issuer": "did:weid:0x12025448644151248e5c1115b23a3fe55f4158e4153",
             "expirationDate": "2019-04-18T21:12:33Z",
-            "claim": claimJson结构体, 略去
+            "claim": claimJson结构体
         },
         "transactionArg": {
         },
@@ -941,15 +1039,28 @@ POST /weIdentity/InvokeFunction
         "v": "1.0.0"
     }
 
-入参说明与SDK文档一致：https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#createcredential
+接口返回: application/json
 
-接口返回：Json，完整的Credential，与SDK文档一致
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50
+
+   * - Key
+     - Value
+   * - ErrorCode
+     - 错误码，0表示成功
+   * - ErrorMessage
+     - 错误信息
+   * - respBody
+     - 完整的Credential信息
+
+接口返回示例:
 
 .. code-block:: java
 
     {
         "respBody": {
-            "context": "https://www.w3.org/2018/credentials/v1",
+            "@context": "https://www.w3.org/2018/credentials/v1",
             "cptId": 10,
             "uuid" : "decd7c81-6b41-414d-8323-00161317a38e",
             "issuer": "did:weid:0x12025448644151248e5c1115b23a3fe55f4158e4153",
@@ -966,7 +1077,67 @@ POST /weIdentity/InvokeFunction
 9. 验证Credential
 --------------------
 
-POST /weIdentity/InvokeFunction
+调用接口：
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50
+
+   * - 标题
+     - 描述
+   * - 接口名
+     - weIdentity/InvokeFunction
+   * - Method
+     - POST
+   * - Content-Type
+     - application/json
+
+
+接口入参：
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 60 20
+
+   * - Key
+     - Value
+     - Required
+   * - functionName
+     - createCredential
+     - Y
+   * - functionArg
+     - 
+     - Y
+   * - functionArg.cptId
+     - CPT ID，与 `SDK直接调用的方式入参 <https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#verify>`_ 一致，下同。
+     - Y
+   * - functionArg.context
+     - context值
+     - Y
+   * - functionArg.uuid
+     - Credential的UUID
+     - Y
+   * - functionArg.issuer
+     - issuer WeID
+     - Y
+   * - functionArg.issuranceDate
+     - 颁发时间
+     - Y
+   * - functionArg.expirationDate
+     - 过期时间
+     - Y
+   * - functionArg.claim
+     - claim Json 结构体
+     - Y
+   * - functionArg.signature
+     - Credential签名值
+     - Y
+   * - transactionArg
+     - 
+     - N
+   * - v
+     - 版本号
+     - Y
 
 接口入参：
 
@@ -974,7 +1145,7 @@ POST /weIdentity/InvokeFunction
 
     {
         "functionArg": {
-            "context": "https://www.w3.org/2018/credentials/v1",
+            "@context": "https://www.w3.org/2018/credentials/v1",
             "cptId": 10,
             "uuid" : "decd7c81-6b41-414d-8323-00161317a38e",
             "issuer": "did:weid:0x12025448644151248e5c1115b23a3fe55f4158e4153",
@@ -990,7 +1161,21 @@ POST /weIdentity/InvokeFunction
     }
 
 
-入参说明与SDK文档一致：https://weidentity.readthedocs.io/projects/javasdk/zh_CN/latest/docs/weidentity-java-sdk-doc.html#verifycredential
+接口返回: application/json
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 50
+
+   * - Key
+     - Value
+   * - ErrorCode
+     - 错误码，0表示成功
+   * - ErrorMessage
+     - 错误信息
+   * - respBody
+     - True/False
+
 
 接口返回：
 
